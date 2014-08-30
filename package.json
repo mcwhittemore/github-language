@@ -1,0 +1,25 @@
+{
+  "name": "github-language",
+  "version": "0.0.0",
+  "description": "give me a repo I'll give you the languages its written in",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "request": "~2.40.0",
+    "cheerio": "~0.17.0"
+  },
+  "devDependencies": {
+    "should": "~4.0.4",
+    "mocha": "~1.21.4"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "github"
+  ],
+  "author": "Matthew Chase Whittemore <mcwhittemore@gmail.com>",
+  "license": "MIT"
+}
