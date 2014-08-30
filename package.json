@@ -1,5 +1,5 @@
 {
-  "name": "github-language",
+  "name": "github-languages",
   "version": "0.0.0",
   "description": "give me a repo I'll give you the languages its written in",
   "main": "index.js",
