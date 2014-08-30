@@ -21,5 +21,13 @@
     "github"
   ],
   "author": "Matthew Chase Whittemore <mcwhittemore@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mcwhittemore/github-language.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcwhittemore/github-language/issues"
+  },
+  "homepage": "https://github.com/mcwhittemore/github-language"
 }
