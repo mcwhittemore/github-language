@@ -2,7 +2,9 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 module.exports = function(url, callback) {
-  var data = url.match(/github.com[\/:][a-zA-Z0-9\-]*\/[a-zA-Z0-9\-]*/);
+  var data = url.match(
+    /github.com[/:][a-zA-Z0-9\-]*\/[a-zA-Z0-9\-\.]*(\.git){0,1}/
+  );
   if (data == undefined || data[0] === null) {
     return setTimeout(function() {
       callback(new Error('Unknown url format: ' + url));

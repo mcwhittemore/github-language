@@ -28,7 +28,8 @@ valid.forEach(function(url) {
 invalid.forEach(function(url) {
   githublang(url, function(err) {
     console.log('TEST: invalid url: ' + url);
-    if (err === undefined) return done(new Error('expected error was not found'));
+    if (err === undefined)
+      return done(new Error('expected error was not found'));
     done();
   });
 });
