@@ -11,11 +11,11 @@ var gitLang = require("github-languages");
 gitLang("https://github.com/mcwhittemore/github-language", function(err, langs){
 	console.log(langs);
 });
+
+// ==> {'JavaScript':100.0}
 ```
 
-Results in `{'JavaScript':100.0}`
+## Supported repo reference formats
 
-## Supported Url Types
-
-* https://github.com/mcwhittemore/github-language
-* git@github.com:mcwhittemore/github-language.git
+* `https://github.com/mcwhittemore/github-language`
+* `git@github.com:mcwhittemore/github-language.git`
