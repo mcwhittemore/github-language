@@ -11,11 +11,13 @@
     "cheerio": "~0.17.0"
   },
   "devDependencies": {
-    "should": "~4.0.4",
-    "mocha": "~1.21.4"
+    "mocha": "~1.21.4",
+    "prettier": "^0.22.0",
+    "should": "~4.0.4"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "node test/test.js",
+    "format": "prettier --single-quote --trailing-comma es5 --write index.js test/test.js"
   },
   "keywords": [
     "github"
