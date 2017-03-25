@@ -1,66 +1,49 @@
-require("should");
+var githublang = require('../');
 
-var githublang = require("../");
+var valid = [
+  'https://github.com/nodejs/node',
+  'git@github.com:nodejs/node.git',
+  'git@github.com:asciidisco/Backbone.Marionette.Handlebars.git',
+  'https://github.com/asciidisco/Backbone.Marionette.Handlebars',
+];
 
-var asynchelper = function(done, fn){
-	try{
-		fn();
-		done();
-	}
-	catch(err){
-		done();
-	}
-}
+var invalid = ['https://www.google.com'];
 
-var hasLangs = function(langs){
-	var langNames = Object.keys(langs);
-	langNames.length.should.be.greaterThan(0);
-	langNames.forEach(function(name){
-		langs[name].should.be.a.Number;
-	});
-}
-
-describe("When this is used", function(){
-	describe("and a repo url like", function(){
-		it("https://github.com/joyent/node should return an object of languages", function(done){
-			this.timeout(5000);
-			githublang("https://github.com/joyent/node", function(err, langs){
-				asynchelper(done, function(){
-					if(err){
-						throw err;
-					}
-					else{
-						hasLangs(langs);
-					}
-				});
-			});
-		});
-
-		it("git@github.com:joyent/node.git should return an object of languages", function(done){
-			this.timeout(5000);
-			githublang("git@github.com:joyent/node.git", function(err, langs){
-				asynchelper(done, function(){
-					if(err){
-						throw err;
-					}
-					else{
-						hasLangs(langs);
-					}
-				});
-			});
-		});
-
-		it("https://www.google.com should though an error", function(done){
-			githublang("https://www.google.com", function(err, langs){
-				asynchelper(done, function(){
-					if(err){
-						err.message.should.startWith("Unknown url format");
-					}
-					else{
-						throw err;
-					}
-				});
-			});
-		});
-	});
+valid.forEach(function(url) {
+  githublang(url, function(err, langStats) {
+    console.log('TEST: valid url: ' + url);
+    if (err) return done(err);
+    var langs = Object.keys(langStats);
+    if (langs.length === 0) return done(new Error('Missing langauges'));
+    for (var i = 0; i < langs.length; i++) {
+      var lang = langs[i];
+      console.log('\tchecking ' + lang);
+      if (typeof langStats[lang] !== 'number' || isNaN(langStats[lang]))
+        return done(new Error('Invalid usage amount'));
+    }
+    done();
+  });
 });
+
+invalid.forEach(function(url) {
+  githublang(url, function(err) {
+    console.log('TEST: invalid url: ' + url);
+    if (err === undefined) return done(new Error('expected error was not found'));
+    done();
+  });
+});
+
+var error = null;
+var count = 0;
+var toRun = valid.length + invalid.length;
+function done(err) {
+  if (err) console.log('\tnot ok');
+  else console.log('\tok');
+  error = error || err;
+  count++;
+  if (count == toRun && error) {
+    console.log(error.stack);
+    process.exit(1);
+  }
+  if (count > toRun) throw new Error('"done" was called too many times');
+}
